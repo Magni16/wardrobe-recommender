@@ -1,0 +1,17 @@
+/* src/components/ClothesGallery.css */
+.clothes-gallery {
+  padding: 20px;
+}
+
+.clothes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.clothing-item img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
