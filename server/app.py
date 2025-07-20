@@ -6,11 +6,12 @@ from server.routes.upload import upload_bp
 from server.routes.recommend import recommend_bp
 from server.database.mongo_connection import get_db
 
+
 from flask import request, jsonify
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 # Register upload route
 app.register_blueprint(upload_bp, url_prefix="/api/upload")

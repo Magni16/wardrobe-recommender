@@ -1,0 +1,19 @@
+.recommendations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recommendations-images {
+  display: flex;
+  gap: 28px;
+  margin-top: 18px;
+}
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recommendation-score {
+  margin-top: 8px;
+  font-weight: bold;
+}

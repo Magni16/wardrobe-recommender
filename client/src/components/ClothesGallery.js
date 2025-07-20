@@ -1,10 +1,9 @@
-// client/src/components/ClothesGallery.js
+// ClothesGallery.js
 import React, { useEffect, useState } from "react";
-import './ClothesGallery.css';
 import axios from "axios";
+import './ClothesGallery.css';
 
-
-const ClothesGallery = () => {
+const ClothesGallery = ({ onItemSelected }) => {
   const [clothes, setClothes] = useState([]);
 
   useEffect(() => {
@@ -13,21 +12,46 @@ const ClothesGallery = () => {
       .catch(error => console.error("Error fetching clothes:", error));
   }, []);
 
+  const grouped = {
+    shirt: [],
+    jeans: [],
+    shoes: [],
+  };
+
+  clothes.forEach(item => {
+    if (grouped[item.category]) grouped[item.category].push(item);
+  });
+
+  console.log("Clothes:", clothes);
+
   return (
     <div>
-      <h2>Your Wardrobe</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-        {clothes.map((item, index) => (
-          <div key={index}>
-            <img
-              src={item.imageUrl}
-              alt={`Clothing ${index}`}
-              style={{ width: "150px", height: "auto", borderRadius: "10px" }}
-            />
-            <p>{item.category}</p> {/* Optional if you store categories */}
+      {Object.entries(grouped).map(([category, items]) => (
+        <div key={category}>
+          <h3>{category.toUpperCase()}</h3>
+          <div className="clothes-grid">
+            {items.map((item, index) => {
+              console.log("🔍 Item from wardrobe:", item);  // Add this
+              const itemId = item._id?.$oid || item._id?.toString?.() || item._id;
+              console.log("🆔 Extracted ID:", itemId);       // Add this too
+
+              return (
+                <div
+                  className="clothing-item"
+                  key={itemId || `${category}-${index}`}
+                  onClick={() => {
+                    console.log("Item clicked:", { category, id: itemId, imageUrl: item.imageUrl });
+                    onItemSelected(category, itemId, item.imageUrl);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={item.imageUrl} alt={category} />
+                </div>
+              );
+            })}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
