@@ -1,0 +1,95 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+.env/
+.env
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Pytest
+.pytest_cache/
+
+__pycache__/
+*.pyc
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Mac/Linux/Windows system files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+logs/
+*.log
+
+# Local database
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+*.pid
+
+# React build artifacts
+client/node_modules/
+client/build/
+
+# Environment variable & sensitive config
+*.env
+*.env.*
+
+# Cloudinary or keys: always ignore secrets
+cloudinary.env
+
+# Misc
+*.bak
+*.tmp
+*.swp
+
+# Ignore static/media uploads unless you want source images versioned
+/media/
+uploads/
