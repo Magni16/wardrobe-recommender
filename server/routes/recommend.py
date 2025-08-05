@@ -67,12 +67,29 @@ def recommend_clothes():
     else:
         return jsonify({"error": "Unsupported category"}), 400
 
-    return jsonify({
-        "selectedShirt": best_combo["shirt"],
-        "recommendedJeans": best_combo["jeans"],
-        "recommendedShoes": best_combo["shoes"],
-        "score": best_score
-    })
+    # ✅ FIXED: Return different response formats based on selected category
+    if selected_category == "shirt":
+        return jsonify({
+            "selectedShirt": best_combo["shirt"],
+            "recommendedJeans": best_combo["jeans"],
+            "recommendedShoes": best_combo["shoes"],
+            "score": best_score
+        })
+    elif selected_category == "jeans":
+        return jsonify({
+            "selectedJeans": best_combo["jeans"],
+            "recommendedShirt": best_combo["shirt"],
+            "recommendedShoes": best_combo["shoes"],
+            "score": best_score
+        })
+    elif selected_category == "shoes":
+        return jsonify({
+            "selectedShoes": best_combo["shoes"],
+            "recommendedShirt": best_combo["shirt"],
+            "recommendedJeans": best_combo["jeans"],
+            "score": best_score
+        })
+
 
 
 # @recommend_bp.route("/api/recommend", methods=["GET"])

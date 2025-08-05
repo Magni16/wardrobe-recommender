@@ -18,13 +18,6 @@ import Modal from "./components/Modal";
 const HERO_IMAGE = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80";
 
 function Hero({ onUpload, onWardrobe, onImageHover }) {
-  const [hovered, setHovered] = useState(false);
-
-  // Notify parent for background takeover
-  React.useEffect(() => {
-    if (onImageHover) onImageHover(hovered, HERO_IMAGE);
-  }, [hovered, onImageHover]);
-
   return (
     <section className="split-hero">
       <div className="split-hero-left">
@@ -45,22 +38,22 @@ function Hero({ onUpload, onWardrobe, onImageHover }) {
         </div>
       </div>
       <div className="split-hero-right">
-        <img
-          src={HERO_IMAGE}
-          alt="Wardrobe Luxury Display"
-          className="split-hero-image"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          onFocus={() => setHovered(true)}
-          onBlur={() => setHovered(false)}
-          tabIndex={0}
-        />
+        <div className="image-mask-wrapper">
+          <img
+            src={HERO_IMAGE}
+            alt="Wardrobe Luxury Display"
+            className="split-hero-image"
+            onMouseEnter={() => onImageHover(true, HERO_IMAGE)}
+            onMouseLeave={() => onImageHover(false, HERO_IMAGE)}
+            onFocus={() => onImageHover(true, HERO_IMAGE)}
+            onBlur={() => onImageHover(false, HERO_IMAGE)}
+            tabIndex={0}
+          />
+        </div>
       </div>
     </section>
   );
 }
-
-// >>>>>>>> REST OF App.js <<<<<<<<<
 
 function WardrobePage({ onItemSelected }) {
   return (
