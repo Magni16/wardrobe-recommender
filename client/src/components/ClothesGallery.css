@@ -1,39 +1,44 @@
-/* src/components/ClothesGallery.css */
 .clothes-gallery {
-  padding: 20px;
+padding: 10px 6px;
 }
-
 .clothes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: left;
-  margin: 26px 0 48px 0;
+display: flex;
+flex-wrap: wrap;
+gap: 22px;
+justify-content: flex-start;
+margin: 18px 0 26px 0;
 }
-
-.clothing-item img {
-  width: 158px;
-  height: 202px;
-  object-fit: cover;
-  display: block;
-  border-radius: var(--radius) var(--radius) 0 0;
-  background: var(--grey-bg);
+.clothes-gallery h3 {
+margin: 10px 6px 8px 6px;
+font-size: 0.95rem;
+font-weight: 900;
+letter-spacing: .16em;
+color: var(--text-dim);
+text-transform: uppercase;
 }
-
 .clothing-item {
-  background: rgba(255,255,255,0.94);
-  border-radius: var(--radius);
-  border: 1px solid var(--grey-contour);
-  box-shadow: var(--shadow);
-  transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
-  overflow: hidden;
+background: var(--bg-elev-1);
+border-radius: var(--radius-card);
+border: 1px solid var(--border);
+box-shadow: var(--shadow-faint);
+transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+overflow: hidden;
+width: 200px; /* consistent card width */
 }
-
-.clothing-item:hover, .clothing-item:focus {
-  z-index: 2;
-  cursor: pointer;
-  transform: scale(1.07) translateY(-8px) rotate(-1.1deg);
-  border-color: var(--accent);
-  box-shadow: 0 8px 32px rgba(30,30,40,0.13);
+.clothing-item:hover,
+.clothing-item:focus {
+cursor: pointer;
+transform: translateY(-6px);
+border-color: #3a556e;
+background: var(--bg-hover);
+box-shadow: 0 16px 40px rgba(2,22,37,0.35);
 }
-
+.clothing-item img {
+width: 100%;
+height: 210px;
+object-fit: cover;
+object-position: center;
+display: block;
+border-radius: var(--radius-card) var(--radius-card) 0 0;
+background: #0b1116;
+}

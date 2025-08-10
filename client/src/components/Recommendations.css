@@ -1,19 +1,34 @@
 .recommendations-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+color: var(--text);
 }
 .recommendations-images {
-  display: flex;
-  gap: 28px;
-  margin-top: 18px;
+display: flex;
+gap: 22px;
+margin-top: 16px;
 }
 .recommendation-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+background: var(--bg-elev-1);
+border: 1px solid var(--border);
+border-radius: var(--radius-card);
+padding: 12px;
+box-shadow: var(--shadow-faint);
+}
+.recommendation-card img {
+width: 150px;
+height: 180px;
+object-fit: cover;
+object-position: center;
+border-radius: 12px;
+background: #0b1116;
 }
 .recommendation-score {
-  margin-top: 8px;
-  font-weight: bold;
+margin-top: 10px;
+font-weight: 800;
+color: var(--accent);
 }

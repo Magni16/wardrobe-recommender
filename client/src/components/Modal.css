@@ -1,34 +1,41 @@
 .modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(18, 18, 18, 0.93);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+position: fixed;
+inset: 0;
+background: rgba(2, 8, 14, 0.72);
+backdrop-filter: blur(6px);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
 }
-
 .modal-content {
-  padding: 32px 24px 18px 24px;
-  position: relative;
-  min-width: 350px;
-  max-height: 80vh;
-  overflow-y: auto;
-  background: #f8f8f9;
-  color: #151515;
-  border-radius: var(--radius);
-  max-width: 480px;
-  border: 1.5px solid var(--grey-contour);
-  box-shadow: var(--shadow);
+padding: 26px 22px 18px;
+position: relative;
+min-width: 340px;
+max-height: 82vh;
+overflow-y: auto;
+background: var(--bg-elev-1);
+color: var(--text);
+border-radius: var(--radius-card);
+max-width: 520px;
+border: 1px solid var(--border);
+box-shadow: var(--shadow-soft);
 }
-
 .modal-close-btn {
-  position: absolute;
-  right: 18px;
-  top: 12px;
-  font-size: 1.8rem;
-  border: none;
-  cursor: pointer;
-  background: var(--secondary-bg);
-  color: var(--accent);
+position: absolute;
+right: 14px;
+top: 10px;
+font-size: 1.6rem;
+border: none;
+cursor: pointer;
+background: transparent;
+color: var(--text-dim);
+padding: 4px 8px;
+border-radius: var(--radius-pill);
+transition: background var(--speed) var(--ease), color var(--speed) var(--ease), transform var(--speed) var(--ease);
+}
+.modal-close-btn:hover {
+background: var(--bg-hover);
+color: var(--text);
+transform: translateY(-1px);
 }
