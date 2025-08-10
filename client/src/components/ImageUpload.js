@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ImageUpload.css";
+import HoverEnlargeCard from "./HoverEnlargeCard";
 
 const ImageUpload = () => {
   const [image, setImage] = useState(null);
@@ -24,15 +25,7 @@ const ImageUpload = () => {
 
   // ✅ Upload handler
   const handleUpload = async () => {
-//    if (!image) {
-//      alert("Please choose a file first.");
-//      return;
-//    }
-//    if (!category) {
-//      alert("Please select a category.");
-//      return;
-//    }
-
+    // Keep your current behavior (guards commented out by you)
     const formData = new FormData();
     formData.append("image", image);
     formData.append("category", category);
@@ -98,7 +91,11 @@ const ImageUpload = () => {
       <div className="uploaded-list">
         {clothes.map((item) => (
           <div key={item._id} className="upload-card">
-            <img src={item.imageUrl} alt="Uploaded" />
+            <HoverEnlargeCard
+              src={item.imageUrl}
+              alt="Uploaded"
+              caption={item.category || "Item"}
+            />
             <p className="meta">Category: {item.category || "N/A"}</p>
             <div className="upload-actions">
               <button

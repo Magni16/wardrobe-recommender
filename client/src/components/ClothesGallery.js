@@ -1,15 +1,17 @@
 // ClothesGallery.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './ClothesGallery.css';
+import "./ClothesGallery.css";
+import HoverEnlargeCard from "./HoverEnlargeCard";
 
 const ClothesGallery = ({ onItemSelected }) => {
   const [clothes, setClothes] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/clothes")
-      .then(response => setClothes(response.data))
-      .catch(error => console.error("Error fetching clothes:", error));
+    axios
+      .get("http://localhost:5000/api/clothes")
+      .then((response) => setClothes(response.data))
+      .catch((error) => console.error("Error fetching clothes:", error));
   }, []);
 
   const grouped = {
@@ -18,7 +20,7 @@ const ClothesGallery = ({ onItemSelected }) => {
     shoes: [],
   };
 
-  clothes.forEach(item => {
+  clothes.forEach((item) => {
     if (grouped[item.category]) grouped[item.category].push(item);
   });
 
@@ -31,21 +33,32 @@ const ClothesGallery = ({ onItemSelected }) => {
           <h3>{category.toUpperCase()}</h3>
           <div className="clothes-grid">
             {items.map((item, index) => {
-              console.log("🔍 Item from wardrobe:", item);  // Add this
-              const itemId = item._id?.$oid || item._id?.toString?.() || item._id;
-              console.log("🆔 Extracted ID:", itemId);       // Add this too
+              console.log("🔍 Item from wardrobe:", item);
+              const itemId =
+                item._id?.$oid || item._id?.toString?.() || item._id;
+              console.log("🆔 Extracted ID:", itemId);
 
               return (
                 <div
                   className="clothing-item"
                   key={itemId || `${category}-${index}`}
                   onClick={() => {
-                    console.log("Item clicked:", { category, id: itemId, imageUrl: item.imageUrl });
+                    console.log("Item clicked:", {
+                      category,
+                      id: itemId,
+                      imageUrl: item.imageUrl,
+                    });
                     onItemSelected(category, itemId, item.imageUrl);
                   }}
-                  style={{ cursor: "pointer" }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Select ${category}`}
                 >
-                  <img src={item.imageUrl} alt={category} />
+                  <HoverEnlargeCard
+                    src={item.imageUrl}
+                    alt={category}
+                    caption={category.toUpperCase()}
+                  />
                 </div>
               );
             })}

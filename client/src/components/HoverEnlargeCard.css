@@ -1,0 +1,115 @@
+.hec {
+position: relative;
+overflow: hidden;
+border-radius: 12px; / rounded-lg /
+border: 1px solid var(--border); / border /
+background: var(--bg-elev-1); / bg-card */
+outline: none;
+transition:
+transform var(--speed) var(--ease),
+box-shadow var(--speed) var(--ease),
+border-color var(--speed) var(--ease),
+outline-color var(--speed) var(--ease);
+will-change: transform, box-shadow, border-color;
+}
+
+.hec:focus-within {
+transform: scale(1.04);
+box-shadow: 0 20px 60px rgba(29,155,240,0.10);
+outline: 2px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+.hec:hover {
+z-index: 10;
+transform: scale(1.04);
+border-color: color-mix(in oklab, var(--accent), transparent 60%);
+box-shadow:
+0 24px 64px rgba(2, 22, 37, 0.45),
+0 10px 26px rgba(29,155,240,0.10);
+}
+
+.hec-media {
+position: relative;
+width: 100%;
+overflow: hidden;
+aspect-ratio: 4 / 5;
+}
+
+
+.hec-img {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;
+user-select: none;
+transition: transform 500ms var(--ease);
+will-change: transform;
+transform-origin: center center;
+}
+
+.hec:hover .hec-img,
+.hec:focus-within .hec-img {
+transform: scale(1.10); /* group-hover:scale-110 */
+}
+
+
+.hec-veil {
+pointer-events: none;
+position: absolute;
+inset: 0;
+background: linear-gradient(
+to top,
+color-mix(in oklab, var(--bg), transparent 60%) 0%,
+color-mix(in oklab, var(--bg), transparent 90%) 50%,
+transparent 100%
+);
+opacity: 0;
+transition: opacity 300ms var(--ease);
+}
+
+.hec:hover .hec-veil,
+.hec:focus-within .hec-veil {
+opacity: 1; /* group-hover:opacity-100 */
+}
+
+.hec-footer {
+pointer-events: none;
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+padding: 12px;
+opacity: 0;
+transform: translateY(8px);
+transition:
+opacity 300ms var(--ease),
+transform 300ms var(--ease);
+}
+
+.hec:hover .hec-footer,
+.hec:focus-within .hec-footer {
+opacity: 1;
+transform: translateY(0);
+}
+
+.hec-chip {
+display: inline-flex; /* inline-flex */
+border-radius: 10px;
+padding: 6px 10px;
+font-size: 0.9rem;
+font-weight: 800;
+color: var(--text);
+background-color: color-mix(in oklab, var(--bg), transparent 20%);
+backdrop-filter: blur(6px);
+border: 1px solid var(--border);
+}
+
+/* Respect prefers-reduced-motion (equivalent of motion-reduce:transition-none) */
+@media (prefers-reduced-motion: reduce) {
+.hec,
+.hec-img,
+.hec-veil,
+.hec-footer {
+transition: none;
+}
+}
