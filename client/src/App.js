@@ -1,6 +1,5 @@
 // App.js
 import './App.css';
-import DarkVeil from "./components/DarkVeil"; // adjust path if needed
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -10,24 +9,40 @@ import {
   useNavigate
 } from "react-router-dom";
 import { FiUpload, FiGrid, FiHome } from "react-icons/fi";
+
+import DarkVeil from "./components/DarkVeil";
 import ImageUpload from "./components/ImageUpload";
 import ClothesGallery from "./components/ClothesGallery";
 import Recommendations from "./components/Recommendations";
 import Modal from "./components/Modal";
 
-// >>>>>>>>>> SPLIT HERO COMPONENT <<<<<<<<<<<
-const HERO_IMAGE = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80";
-
-function Hero({ onUpload, onWardrobe, onImageHover }) {
+/* ================= Home Page ================= */
+function HomePage({ onUpload, onWardrobe }) {
   return (
-    <section className="split-hero">
-      <div className="split-hero-left">
-        <h1 className="split-hero-title">OPEN STORAGE</h1>
-        <p className="split-hero-subtitle">
-          Garage Collection of Wardrobe Art <br />
-          <span className="split-hero-period">Curated fits, instantly.</span>
-        </p>
-        <div className="split-hero-actions">
+    <div className="home-container">
+      {/* DarkVeil full background */}
+      <div className="darkveil-wrapper">
+        <DarkVeil
+          hueShift={285}
+          noiseIntensity={0}
+          scanlineIntensity={0.15}
+          scanlineFrequency={0}
+          speed={1}
+          warpAmount={0.15}
+        />
+      </div>
+
+      {/* Overlay: tagline + buttons */}
+      <div className="home-overlay">
+        <div className="hero-tagline">
+          <span className="tagline-eyebrow">Powered by taste</span>
+          <h1 className="tagline-title">Compute the perfect fit</h1>
+          <p className="tagline-sub">
+            Turn every piece into a versatile outfit with intelligent matching.
+          </p>
+        </div>
+
+        <div className="home-buttons">
           <button className="hero-btn" onClick={onUpload}>
             <FiUpload style={{ marginRight: 8, fontSize: "1.15em" }} />
             Upload Items
@@ -38,24 +53,11 @@ function Hero({ onUpload, onWardrobe, onImageHover }) {
           </button>
         </div>
       </div>
-      <div className="split-hero-right">
-        <div className="image-mask-wrapper">
-          <img
-            src={HERO_IMAGE}
-            alt="Wardrobe Luxury Display"
-            className="split-hero-image"
-            onMouseEnter={() => onImageHover(true, HERO_IMAGE)}
-            onMouseLeave={() => onImageHover(false, HERO_IMAGE)}
-            onFocus={() => onImageHover(true, HERO_IMAGE)}
-            onBlur={() => onImageHover(false, HERO_IMAGE)}
-            tabIndex={0}
-          />
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
 
+/* ================ Other Pages ================= */
 function WardrobePage({ onItemSelected }) {
   return (
     <div className="panel-content">
@@ -74,38 +76,21 @@ function UploadPage() {
   );
 }
 
-function HomePage({ onUpload, onWardrobe, onImageHover }) {
-  return <Hero onUpload={onUpload} onWardrobe={onWardrobe} onImageHover={onImageHover} />;
-}
-
+/* ================ Main App ================= */
 function MainApp() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Hero BG active state for background takeover
-  const [heroBgActive, setHeroBgActive] = useState(false);
-  const [heroImage, setHeroImage] = useState("");
-
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Navigation handlers
   const handleUploadsToggle = () => {
-    if (location.pathname === "/uploads") {
-      navigate("/");
-    } else {
-      navigate("/uploads");
-    }
+    location.pathname === "/uploads" ? navigate("/") : navigate("/uploads");
   };
-
   const handleWardrobeToggle = () => {
-    if (location.pathname === "/wardrobe") {
-      navigate("/");
-    } else {
-      navigate("/wardrobe");
-    }
+    location.pathname === "/wardrobe" ? navigate("/") : navigate("/wardrobe");
   };
 
   const handleItemSelected = (category, id, imageUrl) => {
@@ -115,31 +100,11 @@ function MainApp() {
     setIsModalOpen(true);
   };
   const handleCloseModal = () => setIsModalOpen(false);
-
   const handleGoHome = () => navigate("/");
 
-  // Handler for hero image hover
-  const handleHeroImageHover = (active, img) => {
-    setHeroBgActive(active);
-    setHeroImage(img);
-  };
-
   return (
-    <div
-      className={`App${heroBgActive ? " hero-bg-active" : ""}`}
-      style={
-        heroBgActive && heroImage
-          ? {
-              backgroundImage: `url('${heroImage}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              transition:
-                "background-image 1.1s cubic-bezier(.32,1.6,.45,0.93), background 1.1s cubic-bezier(.32,1.6,.45,0.93)",
-            }
-          : undefined
-      }
-    >
+    <div className={`App ${location.pathname === '/' ? 'home-no-scroll' : ''}`}>
+      {/* Always-visible Home button */}
       <button
         onClick={handleGoHome}
         className="nav-home-btn"
@@ -149,44 +114,42 @@ function MainApp() {
         Home
       </button>
 
+      {/* Secondary nav on non-home routes */}
       {location.pathname !== "/" && (
         <div className="main-nav">
           <button
             onClick={handleUploadsToggle}
-            className={`main-nav-btn${location.pathname === "/uploads" ? " main-nav-btn-active" : ""}`}>
+            className={`main-nav-btn${location.pathname === "/uploads" ? " main-nav-btn-active" : ""}`}
+          >
             <FiUpload style={{ marginRight: 8, fontSize: "1.18rem" }} />
             Uploaded Items
           </button>
           <button
             onClick={handleWardrobeToggle}
-            className={`main-nav-btn${location.pathname === "/wardrobe" ? " main-nav-btn-active" : ""}`}>
+            className={`main-nav-btn${location.pathname === "/wardrobe" ? " main-nav-btn-active" : ""}`}
+          >
             <FiGrid style={{ marginRight: 8, fontSize: "1.18rem" }} />
             Your Wardrobe
           </button>
         </div>
       )}
 
+      {/* Routes */}
       <Routes>
-        <Route
-          path="/wardrobe"
-          element={<WardrobePage onItemSelected={handleItemSelected} />}
-        />
-        <Route
-          path="/uploads"
-          element={<UploadPage />}
-        />
         <Route
           path="/"
           element={
             <HomePage
               onUpload={handleUploadsToggle}
               onWardrobe={handleWardrobeToggle}
-              onImageHover={handleHeroImageHover}
             />
           }
         />
+        <Route path="/uploads" element={<UploadPage />} />
+        <Route path="/wardrobe" element={<WardrobePage onItemSelected={handleItemSelected} />} />
       </Routes>
 
+      {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <Recommendations
           selectedCategory={selectedCategory}
@@ -198,12 +161,10 @@ function MainApp() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <Router>
       <MainApp />
     </Router>
   );
 }
-
-export default App;

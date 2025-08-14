@@ -1,10 +1,10 @@
 .darkveil-canvas {
-  position: absolute; /* cover parent */
-  top: 0;
-  left: 0;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-  z-index: 0; /* behind the rest of your UI */
-  pointer-events: none; /* so clicks pass through */
+  z-index: 0;
+  pointer-events: none;
+
 }
