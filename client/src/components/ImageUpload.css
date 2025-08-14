@@ -1,149 +1,158 @@
-/* ImageUpload.css */
+/* src/components/ImageUpload.css */
 .image-upload {
-color: var(--text);
+  color: var(--text);
 }
 
 .image-upload h2,
 .image-upload h3 {
-margin: 0 0 12px 0;
-font-weight: 900;
-letter-spacing: .02em;
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  letter-spacing: .02em;
 }
 
 .upload-toolbar {
-display: flex;
-flex-wrap: wrap;
-gap: 12px;
-align-items: center;
-margin: 10px 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 10px 0 14px;
 }
 
 .input,
 .select {
-background: var(--bg-elev-1);
-color: var(--text);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 10px 12px;
-font-weight: 600;
-transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+  background: var(--bg-elev-1);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 600;
+  transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
 }
 .input:hover,
-.select:hover {
-border-color: #395a74;
-}
+.select:hover { border-color: #395a74; }
 .input:focus,
-.select:focus {
-outline: none;
-box-shadow: var(--ring);
-}
+.select:focus { outline: none; box-shadow: var(--ring); }
 
-/* “Choose File” chip inside file input */
 .input::file-selector-button {
-appearance: none;
-border: none;
-margin-right: 10px;
-background: var(--accent);
-color: #00131f;
-font-weight: 800;
-padding: 8px 12px;
-border-radius: 999px;
-cursor: pointer;
+  appearance: none;
+  border: none;
+  margin-right: 10px;
+  background: var(--accent);
+  color: #00131f;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
 }
 
 .btn {
---btn-bg: var(--bg-elev-1);
---btn-fg: var(--text);
---btn-br: var(--border);
---btn-hover: var(--bg-hover);
+  --btn-bg: var(--bg-elev-1);
+  --btn-fg: var(--text);
+  --btn-br: var(--border);
+  --btn-hover: var(--bg-hover);
 
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background: var(--btn-bg);
-color: var(--btn-fg);
-border: 1px solid var(--btn-br);
-border-radius: var(--radius-pill);
-padding: 10px 14px;
-font-weight: 800;
-letter-spacing: .02em;
-cursor: pointer;
-box-shadow: var(--shadow-faint);
-transition: transform var(--speed) var(--ease), background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
-user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-br);
+  border-radius: var(--radius-pill);
+  padding: 10px 14px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+  box-shadow: var(--shadow-faint);
+  transition: transform var(--speed) var(--ease), background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+  user-select: none;
 }
 .btn:hover,
-.btn:focus-visible {
-background: var(--btn-hover);
-border-color: #395a74;
-transform: translateY(-1px);
-}
+.btn:focus-visible { background: var(--btn-hover); border-color: #395a74; transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 
 .btn--primary {
---btn-bg: var(--accent);
---btn-fg: #00131f;
---btn-br: transparent;
+  --btn-bg: var(--accent);
+  --btn-fg: #00131f;
+  --btn-br: transparent;
 }
 .btn--danger {
---btn-bg: var(--danger);
---btn-fg: #0a0a0a;
---btn-br: transparent;
+  --btn-bg: var(--danger);
+  --btn-fg: #0a0a0a;
+  --btn-br: transparent;
 }
 
+/* Uploaded list matches gallery grid */
 .uploaded-list {
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
 }
 
+/* Empty state + skeleton reuse clothes styles if needed */
+.empty-state {
+  color: var(--text-dim);
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: var(--shadow-faint);
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 22px;
+}
+.skeleton-card {
+  height: calc(200px * 1.25);
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-faint);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Card wrapper for metadata/actions under the premium card */
 .upload-card {
-border: 1px solid var(--border);
-background: var(--bg-elev-1);
-padding: 12px;
-width: 200px;
-border-radius: var(--radius-card);
-box-shadow: var(--shadow-faint);
-display: flex;
-flex-direction: column;
-gap: 10px;
-transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+  border: 1px solid var(--border);
+  background: var(--bg-elev-1);
+  padding: 12px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-faint);
+  transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), border-color var(--speed) var(--ease);
 }
-.upload-card:hover {
-transform: translateY(-4px);
-border-color: #3a556e;
-background: var(--bg-hover);
-box-shadow: 0 16px 40px rgba(2,22,37,0.35);
-}
-
-.upload-card img {
-width: 100%;
-height: 160px; /* uniform thumbnail height /
-object-fit: cover; / crop consistently */
-object-position: center;
-border-radius: 12px;
-background: #0b1116;
-}
+.upload-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(2,22,37,0.35); border-color: #395a74; }
 
 .upload-card .meta {
-color: var(--text-dim);
-font-weight: 700;
-font-size: 0.92rem;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin: 8px 2px 6px;
 }
 
 .upload-actions {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .hr-soft {
-border: none;
-border-top: 1px solid var(--border);
-opacity: 0.7;
-margin: 16px 0;
+  border: none;
+  border-top: 1px solid var(--border);
+  opacity: 0.7;
+  margin: 16px 0;
 }
 
 @media (max-width: 520px) {
-.upload-card { width: 100%; }
+  .upload-card { max-width: 100%; }
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ImageUpload.css";
 import HoverEnlargeCard from "./HoverEnlargeCard";
+import api from '../api/axios'; // if you have it
 
 const ImageUpload = () => {
   const [image, setImage] = useState(null);
@@ -70,6 +71,7 @@ const ImageUpload = () => {
           onChange={(e) => setImage(e.target.files?.[0] || null)}
         />
         <select
+
           className="select"
           value={category}
           onChange={(e) => setCategory(e.target.value)}

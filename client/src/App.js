@@ -1,5 +1,6 @@
 // App.js
 import './App.css';
+import DarkVeil from "./components/DarkVeil"; // adjust path if needed
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,

@@ -1,44 +1,52 @@
 .clothes-gallery {
-padding: 10px 6px;
+  padding: 10px 6px;
 }
-.clothes-grid {
-display: flex;
-flex-wrap: wrap;
-gap: 22px;
-justify-content: flex-start;
-margin: 18px 0 26px 0;
-}
+
 .clothes-gallery h3 {
-margin: 10px 6px 8px 6px;
-font-size: 0.95rem;
-font-weight: 900;
-letter-spacing: .16em;
-color: var(--text-dim);
-text-transform: uppercase;
+  margin: 10px 6px 8px 6px;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  color: var(--text-dim);
+  text-transform: uppercase;
 }
-.clothing-item {
-background: var(--bg-elev-1);
-border-radius: var(--radius-card);
-border: 1px solid var(--border);
-box-shadow: var(--shadow-faint);
-transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), border-color var(--speed) var(--ease), background var(--speed) var(--ease);
-overflow: hidden;
-width: 200px; /* consistent card width */
+
+.clothes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 22px;
+  margin: 18px 0 26px 0;
 }
-.clothing-item:hover,
-.clothing-item:focus {
-cursor: pointer;
-transform: translateY(-6px);
-border-color: #3a556e;
-background: var(--bg-hover);
-box-shadow: 0 16px 40px rgba(2,22,37,0.35);
+
+/* Empty state */
+.empty-state {
+  color: var(--text-dim);
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: var(--shadow-faint);
 }
-.clothing-item img {
-width: 100%;
-height: 210px;
-object-fit: cover;
-object-position: center;
-display: block;
-border-radius: var(--radius-card) var(--radius-card) 0 0;
-background: #0b1116;
+
+/* Skeleton loading */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 22px;
+}
+.skeleton-card {
+  height: calc(200px * 1.25); /* close to 4/5 ratio area */
+  border-radius: 12px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-faint);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
