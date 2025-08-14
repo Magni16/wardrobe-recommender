@@ -23,7 +23,7 @@ function HomePage({ onUpload, onWardrobe }) {
       {/* DarkVeil full background */}
       <div className="darkveil-wrapper">
         <DarkVeil
-          hueShift={285}
+          hueShift={20}
           noiseIntensity={0}
           scanlineIntensity={0.15}
           scanlineFrequency={0}
@@ -70,7 +70,6 @@ function WardrobePage({ onItemSelected }) {
 function UploadPage() {
   return (
     <div className="panel-content">
-      <h2 className="panel-title">UPLOADED ITEMS</h2>
       <ImageUpload />
     </div>
   );

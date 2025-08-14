@@ -1,9 +1,23 @@
+:root {
+--gallery-x: 8px; /* tweak this to move headings/cards together */
+.clothes-gallery { padding: 10px var(--gallery-x); }
+.clothes-gallery h3 { margin: 12px var(--gallery-x) 8px var(--gallery-x); }
+.clothes-grid, .skeleton-grid { padding: 0 var(--gallery-x); }
+}
+
 .clothes-gallery {
   padding: 10px 6px;
+  overflow: hidden; /* prevent child overflow shadow/clipping */
+}
+
+.clothes-gallery section {
+overflow: hidden; /* keep each category block contained */
+padding-left: 0;
 }
 
 .clothes-gallery h3 {
-  margin: 10px 6px 8px 6px;
+  margin: 12px 0 8px 4px;
+  padding-left: 100px;
   font-size: 0.95rem;
   font-weight: 900;
   letter-spacing: .16em;
@@ -32,6 +46,7 @@
 
 /* Skeleton loading */
 .skeleton-grid {
+  margin: 12px 0 26px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 22px;
@@ -49,4 +64,10 @@
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+.clothes-gallery img {
+max-width: 100%;
+height: auto;
+display: block;
 }

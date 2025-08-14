@@ -181,15 +181,17 @@
 /* Panel Pages */
 .panel-content {
   margin: 56px auto 0 auto;
-  background: var(--bg-elev-1);
+  background: transparent;
   border-radius: var(--radius-card);
   padding: 28px 22px;
-  width: min(900px, 96vw);
-  box-shadow: var(--shadow-soft);
-  border: 1px solid var(--border);
+  width: min(1200px, 96vw);
+  box-shadow: none;
+  border: none;
+  backdrop-filter: blur(6px); /* optional: subtle background blur */
 }
 .panel-title {
   font-size: 1.6rem;
+  padding-left: 113px;
   font-weight: 900;
   text-transform: uppercase;
   margin-bottom: 18px;

@@ -86,9 +86,9 @@ export default function ClothesGallery({ onItemSelected }) {
             items={mapped}
             columns={3}
             rows={Math.ceil(mapped.length / 3)}
-            radius={280}
-            damping={0.35}
-            fadeOut={0.5}
+            radius={380}
+            damping={0.45}
+            fadeOut={0.8}
             ease="power3.out"
             onCardClick={(c) => onItemSelected?.(c.category, c.id, c.image)}
           />
